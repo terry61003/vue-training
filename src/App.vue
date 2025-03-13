@@ -1,17 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <p v-if="isShow">Hello World</p>
+  <p v-show="isShow">Hello World</p>
+  <p v-for="(user, index) in users1" :key="user">{{ index }} {{ user }}</p>
+  <p v-for="(user, index) in users2" :key="user.email">
+    {{ index }} {{ user.name }} {{ user.email }}
+  </p>
+  <div v-for="(user, index) in users1" :key="user">
+    <p v-if="user === 'Jake'">{{ index }} {{ user }}</p>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  data() {
+    return {
+      isShow: true,
+      users1: ['Jake', 'Allan', 'Eason'],
+      users2: [
+        { name: 'Jake', email: 'jake@gmail.com' },
+        { name: 'Allan', email: 'allan@gmail.com' },
+        { name: 'Eason', email: 'eason@gmail.com' },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
