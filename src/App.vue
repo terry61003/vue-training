@@ -1,29 +1,37 @@
 <template>
+  <p>{{ count }}</p>
+  <button @click="incrementCount">button</button>
+  <hr>
   {{ name }}
   <br>
-  {{ user.id }} {{ user.name }}
+  <input type="text" v-model="name" />
+  <hr>
+  {{ email }}
+  <br>
+  <input type="text" v-model="email" />
 </template>
 
 <script>
-import { ref, reactive } from 'vue';
+import { ref, reactive, toRefs } from 'vue';
 
 export default {
   name: 'App',
   setup() {
+    const count = ref(0);
     const name = ref('');
     const user = reactive({
-      id: 0,
-      name: '',
+      email: '',
     });
-
-    // 設定值要使用value
-    name.value = 'Jake';
-
-    user.id = 1;
-    user.name = 'Allan';
-
+    
+    function incrementCount() {
+      count.value++;
+    }
+    
     return {
-      name, user
+      count,
+      incrementCount,
+      name,
+      ...toRefs(user),
     };
   },
 };
