@@ -1,35 +1,11 @@
 <template>
-  <input type="text" v-model="formData.name" />
+  {{ count }}
   <br />
-
-  <textarea v-model="formData.text" />
-  <br />
-
-  <select v-model="formData.selectValue">
-    <option value="">select</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
-  <br />
-
-  <input type="checkbox" v-model="formData.isCheck" /> is check
-  <br />
-
-  <input type="checkbox" value="0" v-model="formData.checkbox" /> 0
-  <input type="checkbox" value="1" v-model="formData.checkbox" /> 1
-  <input type="checkbox" value="2" v-model="formData.checkbox" /> 2
-  <input type="checkbox" value="3" v-model="formData.checkbox" /> 3
-  <br />
-
-  <input type="radio" value="0" v-model="formData.radio" /> 0
-  <input type="radio" value="1" v-model="formData.radio" /> 1
-  <input type="radio" value="2" v-model="formData.radio" /> 2
-  <input type="radio" value="3" v-model="formData.radio" /> 3
-  <br />
-  <button @click="submit">送出</button>
-  <br>
-  {{ formData }}
+  <button @click="addCount">Add Count</button>
+  <hr>
+  <input type="text" v-model="user.name" />
+  <hr>
+  <button @click="addItem">Add item</button>
 </template>
 
 <script>
@@ -37,21 +13,38 @@ export default {
   name: 'App',
   data() {
     return {
-      formData: {
+      count: 0,
+      user: {
         name: '',
-        text: '',
-        selectValue: '',
-        isCheck: false,
-        checkbox: [],
-        radio: '',
-      }
+      },
+      items: [],
     };
   },
   methods: {
-    submit() {
-      console.log(this.formData);
-    }
-  }
+    addCount() {
+      this.count += 1;
+    },
+    addItem() {
+      this.items.push('test');
+    },
+  },
+  watch: {
+    count(newValue, oldValue) {
+      console.log(newValue, oldValue);
+    },
+    user: {
+      handler(newValue) {
+        console.log(newValue);
+      },
+      deep: true, //要監聽物件時，要設定才會起作用
+    },
+    items: {
+      handler(newValue) {
+        console.log(newValue);
+      },
+      deep: true, //要監聽陣列時，要設定才會起作用
+    },
+  },
 };
 </script>
 
