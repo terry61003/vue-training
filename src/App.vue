@@ -1,20 +1,31 @@
 <template>
   <Header :name="name" />
+  <hr>
+  <View @view-text="getViewText" />
+  <br>
+  {{ text }}
 </template>
 
 <script>
 import Header from './components/HeaderTest.vue';
+import View from './components/ViewTest.vue';
 
 export default {
   name: 'App',
   components: {
-    Header,
+    Header, View
   },
   data() {
     return {
       name: 'Allan',
+      text: '',
     };
   },
+  methods: {
+    getViewText(text) {
+      this.text = text;
+    }
+  }
 };
 </script>
 
