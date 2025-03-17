@@ -4,21 +4,27 @@
   <View @view-text="getViewText" />
   <br>
   {{ text }}
+  <hr>
+  <InputTest v-model="name2" />
+  <br>
+  {{ name2 }}
 </template>
 
 <script>
 import Header from './components/HeaderTest.vue';
 import View from './components/ViewTest.vue';
+import InputTest from './components/InputTest.vue';
 
 export default {
   name: 'App',
   components: {
-    Header, View
+    Header, View, InputTest
   },
   data() {
     return {
       name: 'Allan',
       text: '',
+      name2: '',
     };
   },
   methods: {
