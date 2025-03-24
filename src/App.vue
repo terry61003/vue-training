@@ -1,44 +1,49 @@
 <template>
-  <button @click="show">Load Component</button>
-  <LifeCycleComponent v-if="isShow" />
-  <br />
+  <input type="text" ref="inputRef" />
 </template>
 
 <script>
-import LifeCycleComponent from './components/LifeCycleComponent.vue';
+import {
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+  ref,
+} from 'vue';
 
 export default {
   name: 'App',
-  components: {
-    LifeCycleComponent,
-  },
-  beforeCreate() {
-    console.log('beforeCreate');
-  },
-  created() {
-    console.log('created');
-  },
-  beforeMount() {
-    console.log('beforeMount');
-  },
-  mounted() {
-    console.log('mounted');
-  },
-  beforeUpdate() {
-    console.log('beforeUpdate');
-  },
-  updated() {
-    console.log('updated');
-  },
-  data() {
+  setup() {
+    const inputRef = ref(null);
+
+    onBeforeMount(() => {
+      console.log('onBeforeMount');
+    });
+    onMounted(() => {
+      console.log('onMounted');
+
+      // 測試 onMounted
+      // UI DOM相關操作可放置此生命週期
+      inputRef.value.focus();
+    });
+    onBeforeUpdate(() => {
+      console.log('onBeforeUpdate');
+    });
+    onUpdated(() => {
+      console.log('onUpdated');
+    });
+    onBeforeUnmount(() => {
+      console.log('onBeforeUnmount');
+    });
+    onUnmounted(() => {
+      console.log('onUnmounted');
+    });
+
     return {
-      isShow: false,
+      inputRef,
     };
-  },
-  methods: {
-    show() {
-      this.isShow = !this.isShow;
-    },
   },
 };
 </script>
