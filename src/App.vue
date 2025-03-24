@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs } from 'vue';
+import { ref, reactive, toRefs, watch } from 'vue';
 
 export default {
   name: 'App',
@@ -22,6 +22,28 @@ export default {
     const user = reactive({
       email: '',
     });
+
+    watch(
+      [name, count],
+      (newValue, oldValue) => {
+        console.log('name', newValue[0], oldValue[0]);
+        console.log('count', newValue[1], oldValue[1]);
+      },
+      {
+        immediate: true, //如果變數一開始有值，就會被 watch
+      }
+    );
+
+    // reactive
+    watch(
+      () => {
+        return { ...user };
+      },
+      (newValue, oldValue) => {
+        console.log('user', newValue.email, oldValue.email);
+      }
+    );
+
     
     function incrementCount() {
       count.value++;
